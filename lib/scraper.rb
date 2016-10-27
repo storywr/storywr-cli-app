@@ -1,4 +1,4 @@
-class SCRAPER
+class Scraper
 
 	def initialize
 	end
