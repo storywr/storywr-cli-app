@@ -9,6 +9,8 @@ class Cli
 					list_games
 					break
 				end
+		end
+	end
 
 
 	def list_games
