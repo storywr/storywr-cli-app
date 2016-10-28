@@ -1,11 +1,12 @@
 require 'nokogiri'
 require 'open-uri'
+require 'pry'
 
 class Scraper
 	attr_reader :scraped_games, :tickets
 
 	def self.get_games
-		doc = Nokogiri::HTML(http://www.espn.com/nfl/schedule)
+		doc = Nokogiri::HTML("http://www.espn.com/nfl/schedule")
 		@scraped_games = []
 		@tickets = {}
 		counter = 1
@@ -26,9 +27,10 @@ class Scraper
 		end
 	end
 
-	def tickets(game_number)
+	def ticket_prices(game_number)
 		stubhub_url = @tickets[game_number.to_sym]
 		doc = Nokogiri::HTML(stubhub_url)
+		binding.pry
 	end
 
 end

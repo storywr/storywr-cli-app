@@ -18,7 +18,7 @@ class FootballCli
 		if input == "y"
 			puts "Enter the corresponding number of the game you would like to see"
 			input = gets.strip.to_i
-			Scraper.tickets(input)
+			Scraper.ticket_prices(input)
 		end
 	end
 
