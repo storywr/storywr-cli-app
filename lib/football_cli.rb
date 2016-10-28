@@ -1,8 +1,8 @@
-class Cli
+class FootballCli
 
 	def call
 		puts "Welcome to NFL Helper!"
-		puts "Enter 'list' to list games for the current week"
+		puts "Enter 'list' to list games for the current week."
 		input = gets.strip
 		if input == "list"
 			list_games

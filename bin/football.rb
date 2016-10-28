@@ -1,0 +1,1 @@
+FootballCli.new.call
