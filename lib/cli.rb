@@ -12,6 +12,7 @@ class Cli
 
 	def list_games
 		puts "NFL Games this Week:"
+		Scraper.games
 		puts "Would you like to check ticket prices? (y/n)"
 		input = gets.strip
 		if input == "y"
