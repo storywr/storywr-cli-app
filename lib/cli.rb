@@ -19,10 +19,6 @@ class CLI
 			puts ""
 			puts "Enter corresponding game number or team."
 			input = gets.strip
-			if input.to_i.to_s == input
-				input = input.to_i - 1
-				input = input.to_s
-			end
 			Scraper.ticket_prices(input)
 		end
 	end
