@@ -31,9 +31,14 @@ class Scraper
 		puts ""
 	end
 
-	def self.ticket_prices(game_number)
+	def self.ticket_prices(game)
 		puts ""
-		puts @tickets[game_number.to_s.to_sym]
+		if game.to_i.to_s == game
+			puts @tickets[game.to_s.to_sym]
+		else
+			game_number = @scraped_games.index { |matchup| matchup.include?(game) }
+			puts @tickets[game_number.to_s.to_sym]
+		end
 	end
 
 end

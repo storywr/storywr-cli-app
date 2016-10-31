@@ -17,8 +17,12 @@ class CLI
 		input = gets.strip
 		if input == "y"
 			puts ""
-			puts "Enter the corresponding number of the game you would like to attend."
+			puts "Enter corresponding game number or team."
 			input = gets.strip
+			if input.to_i.to_s == input
+				input = input.to_i - 1
+				input = input.to_s
+			end
 			Scraper.ticket_prices(input)
 		end
 	end
