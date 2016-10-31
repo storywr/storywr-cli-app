@@ -1,4 +1,4 @@
-class FootballCli
+class CLI
 
 	def call
 		puts "Welcome to NFL Helper!"
@@ -12,7 +12,8 @@ class FootballCli
 
 	def list_games
 		puts "NFL Games this Week:"
-		Scraper.games
+		Scraper.get_games
+		Scraper.show_games
 		puts "Would you like to check ticket prices? (y/n)"
 		input = gets.strip
 		if input == "y"

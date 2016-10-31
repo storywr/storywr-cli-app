@@ -21,16 +21,15 @@ class Scraper
 		end
 	end
 
-	def self.games
+	def self.show_games
 		@scraped_games.each do |game|
 			puts game
 		end
 	end
 
-	def ticket_prices(game_number)
+	def self.ticket_prices(game_number)
 		stubhub_url = @tickets[game_number.to_sym]
 		doc = Nokogiri::HTML(stubhub_url)
-		binding.pry
 	end
 
 end
