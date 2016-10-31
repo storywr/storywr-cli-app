@@ -5,16 +5,15 @@ require 'pry'
 class Scraper
 	attr_reader :scraped_games, :tickets
 
-	def self.get_games
-		doc = Nokogiri::HTML(open("http://www.espn.com/nfl/schedule"))
+	def self.get_games(week)
+		doc = Nokogiri::HTML(open("http://www.espn.com/nfl/schedule/_/week/#{week}"))
 		@scraped_games = []
 		@tickets = {}
 		counter = 1
-		games = doc.css(".schedule")
+		games = doc.css("#sched-container .responsive-table-wrap tr")
 		games.each do |game|
-			away = game.css("td a .team-name").text
-			home = game.css("td a .home .team-name").text
-			away.sub("#{home}", "")
+			away = game.css(".team-name").text
+			home = game.css(".home .team-name").text
 			@scraped_games << "#{counter}. #{away} at #{home}"
 			@tickets[counter.to_s.to_sym] = game.css("href")
 			counter += 1

@@ -1,18 +1,16 @@
 class CLI
 
 	def call
-		puts "Welcome to NFL Helper!"
-		puts "Enter 'list' to list games for the current week."
-		input = gets.strip
-		if input == "list"
-			list_games
-		end
+		start
 	end
 
 
-	def list_games
+	def start
+		puts "Welcome to NFL Helper!"
+		puts "Enter the NFL week number you would like to see."
+		input = gets.strip.to_s
 		puts "NFL Games this Week:"
-		Scraper.get_games
+		Scraper.get_games(input)
 		Scraper.show_games
 		puts "Would you like to check ticket prices? (y/n)"
 		input = gets.strip
