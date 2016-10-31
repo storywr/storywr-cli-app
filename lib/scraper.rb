@@ -14,8 +14,8 @@ class Scraper
 		games.each do |game|
 			ticket = game.css(".tickets").text
 			@tickets[counter.to_s.to_sym] = ticket
-			away = game.css(".team-name").text
-			home = game.css(".home .team-name").text
+			away = game.css(".team-name span").text
+			home = game.css(".home .team-name span").text
 			away = away.sub("#{home}", "")
 			unless home == ""
 				@scraped_games << "#{counter}. #{away} at #{home}"
