@@ -32,11 +32,8 @@ class Scraper
 	end
 
 	def self.ticket_prices(game_number)
-		puts @tickets
-=begin
-		stubhub_url = @tickets[game_number.to_sym]
-		doc = Nokogiri::HTML(stubhub_url)
-=end
+		puts ""
+		puts @tickets[game_number.to_s.to_sym]
 	end
 
 end
