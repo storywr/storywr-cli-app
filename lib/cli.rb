@@ -9,6 +9,7 @@ class CLI
 		puts "Welcome to NFL Helper!"
 		puts "Enter the NFL week number you would like to see."
 		input = gets.strip.to_s
+		puts ""
 		puts "NFL Games this Week:"
 		Scraper.get_games(input)
 		Scraper.show_games

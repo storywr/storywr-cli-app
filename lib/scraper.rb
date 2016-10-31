@@ -12,12 +12,13 @@ class Scraper
 		counter = 1
 		games = doc.css("#sched-container .responsive-table-wrap tr")
 		games.each do |game|
+			ticket = game.css(".tickets").text
+			@tickets[counter.to_s.to_sym] = ticket
 			away = game.css(".team-name").text
 			home = game.css(".home .team-name").text
 			away = away.sub("#{home}", "")
 			unless home == ""
 				@scraped_games << "#{counter}. #{away} at #{home}"
-				@tickets[counter.to_s.to_sym] = game.css("href")
 				counter += 1
 			end
 		end
@@ -27,11 +28,15 @@ class Scraper
 		@scraped_games.each do |game|
 			puts game
 		end
+		puts ""
 	end
 
 	def self.ticket_prices(game_number)
+		puts @tickets
+=begin
 		stubhub_url = @tickets[game_number.to_sym]
 		doc = Nokogiri::HTML(stubhub_url)
+=end
 	end
 
 end
