@@ -15,9 +15,11 @@ class Scraper
 			away = game.css(".team-name").text
 			home = game.css(".home .team-name").text
 			away = away.sub("#{home}", "")
-			@scraped_games << "#{counter}. #{away} at #{home}"
-			@tickets[counter.to_s.to_sym] = game.css("href")
-			counter += 1
+			unless home == ""
+				@scraped_games << "#{counter}. #{away} at #{home}"
+				@tickets[counter.to_s.to_sym] = game.css("href")
+				counter += 1
+			end
 		end
 	end
 
