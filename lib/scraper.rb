@@ -30,9 +30,10 @@ class Scraper
 		counter = 1
 		games = doc.css("#sched-container .responsive-table-wrap tr")
 		games.each do |game|
-			score = game.css("")
+			score = game.css("td")[2]
 			home = game.css(".home .team-name span").text
 			unless home == ""
+				@results << score.text
 			end
 		end
 	end
@@ -54,8 +55,8 @@ class Scraper
 		end
 	end
 
-	def self.game_stats(game)
-		puts
+	def self.game_stats
+		puts @results
 	end
 
 end

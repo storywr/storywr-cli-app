@@ -21,10 +21,10 @@ class CLI
 		puts
 		puts "Enter NFL Week Number"
 		week = gets.strip.to_s
-		display_games(week)
-		puts "Enter corresponding game number or team name."
-		#input = gets.strip
-		#Scraper.game_stats(input)
+		Scraper.get_stats(week)
+		puts
+		puts "NFL Scores Week #{week}:"
+		Scraper.game_stats
 	end
 
 	def find_tickets
