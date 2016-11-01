@@ -1,11 +1,13 @@
 class Matchup
-  attr_accessor :week, :away, :home, :score
+  attr_accessor :week, :away, :home, :score, :tickets, :price
   @@all = []
 
-  def initialize(week, away, home)
+  def initialize(week, away, home, tickets, price)
     @week = week
     @away = away
     @home = home
+    @tickets = tickets
+    @price = price
   end
 
   def self.all
@@ -19,8 +21,12 @@ class Matchup
     end
   end
 
-  def add_score(team)
-    @score = Score.new(team)
+  def show_tickets
+    puts "#{tickets} available from #{price}"
+  end
+
+  def add_score(points)
+    @score = Score.new(points)
   end
 
 end
