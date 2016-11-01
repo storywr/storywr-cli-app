@@ -3,7 +3,7 @@ require 'open-uri'
 require 'pry'
 
 class Scraper
-	attr_reader :scraped_games, :tickets
+	attr_reader :scraped_games, :tickets, :results
 
 	def self.get_games(week)
 		doc = Nokogiri::HTML(open("http://www.espn.com/nfl/schedule/_/week/#{week}"))
@@ -24,21 +24,38 @@ class Scraper
 		end
 	end
 
+	def self.get_stats(week)
+		doc = Nokogiri::HTML(open("http://www.espn.com/nfl/schedule/_/week/#{week}"))
+		@results = []
+		counter = 1
+		games = doc.css("#sched-container .responsive-table-wrap tr")
+		games.each do |game|
+			score = game.css("")
+			home = game.css(".home .team-name span").text
+			unless home == ""
+			end
+		end
+	end
+
 	def self.show_games
 		@scraped_games.each do |game|
 			puts game
 		end
-		puts ""
+		puts
 	end
 
 	def self.ticket_prices(game)
-		puts ""
+		puts
 		if game.to_i.to_s == game
 			puts @tickets[game.to_s.to_sym]
 		else
 			game_number = @scraped_games.index { |matchup| matchup.include?(game) } + 1
 			puts @tickets[game_number.to_s.to_sym]
 		end
+	end
+
+	def self.game_stats(game)
+		puts
 	end
 
 end
