@@ -34,9 +34,9 @@ class Scraper
 			score = game.css("td")[2]
 			home = game.css(".home .team-name span").text
 			unless home == ""
-				links = game.css("td").collect { |link| link["href"] }
-				headline_url = links[2]
-				@summaries[counter.to_s.to_sym] = headline_url
+				links = game.css("td a").map { |link| link["href"] }
+				headline_url = links[4]
+				@summaries[counter.to_s.to_sym] = "http://www.espn.com/#{headline_url}"
 				@results << "#{counter}. #{score.text}"
 				counter += 1
 			end
@@ -65,7 +65,8 @@ class Scraper
 	end
 
 	def self.summary(game)
-		puts @summaries
+		doc = Nokogiri::HTML(open(@summaries[game.to_s.to_sym]))
+		puts doc
 	end
 
 end
