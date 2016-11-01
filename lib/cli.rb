@@ -4,10 +4,9 @@ class CLI
 		start
 	end
 
-
 	def start
 		puts
-		puts "Welcome to NFL Stats and Ticket Finder!"
+		puts "Welcome to NFL Scores and Ticket Finder!"
 		loop do
 			puts "Enter 'Scores' to see NFL scores and headlines and 'Tickets' to find Tickets for upcoming games."
 			input = gets.strip.downcase
@@ -32,7 +31,7 @@ class CLI
 		puts "NFL Scores Week #{week}:"
 		Scraper.game_scores
 		puts
-		puts "Which game would you like the summary for?"
+		puts "Enter corresponding number for summary."
 		game = gets.strip
 		Scraper.summary(game)
 	end

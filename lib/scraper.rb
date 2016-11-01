@@ -3,7 +3,7 @@ require 'open-uri'
 require 'pry'
 
 class Scraper
-	attr_reader :scraped_games, :tickets, :results, :summaries
+	attr_reader :scraped_games, :tickets, :results, :summaries		
 
 	def self.get_games(week)
 		doc = Nokogiri::HTML(open("http://www.espn.com/nfl/schedule/_/week/#{week}"))
