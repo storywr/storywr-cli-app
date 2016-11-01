@@ -8,12 +8,18 @@ class CLI
 	def start
 		puts
 		puts "Welcome to NFL Stats and Ticket Finder!"
-		puts "Enter 'Stats' to see NFL scores and stat lines and 'Tickets' to find Tickets for upcoming games."
-		input = gets.strip
-		if input == "Stats"
-			find_stats
-		elsif input == "Tickets"
-			find_tickets
+		loop do
+			puts "Enter 'Scores' to see NFL scores and headlines and 'Tickets' to find Tickets for upcoming games."
+			input = gets.strip.downcase
+			if input == "scores"
+				find_stats
+				break
+			elsif input == "tickets"
+				find_tickets
+				break
+			else
+				puts "Answer not recognized"
+			end
 		end
 	end
 
