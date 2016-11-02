@@ -51,7 +51,7 @@ class CLI
 		puts "----------------------"
 		puts "Would you like to read the headlines? (y/n)"
 		answer = gets.strip.downcase
-		if answer == "y"
+		if answer == "y" || answer == "yes"
 			headlines
 		else
 			puts
