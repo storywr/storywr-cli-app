@@ -1,7 +1,11 @@
 class CLI
 
 	def call
-		start
+		Scraper.get_games(10)
+		Matchup.this_weeks_games
+		puts
+		puts
+		Matchup.find_tickets("Miami")
 	end
 
 	def start
@@ -31,7 +35,7 @@ class CLI
 		puts "NFL Scores Week #{week}:"
 		Scraper.game_scores
 		puts
-		puts "Enter corresponding number for summary."
+		puts "Enter corresponding number for game summary."
 		game = gets.strip
 		Scraper.summary(game)
 	end

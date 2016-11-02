@@ -17,8 +17,9 @@ class Scraper
 			home = game.css(".home .team-name span").text
 			away = away.sub("#{home}", "")
 			unless home == ""
-				@scraped_games << "#{counter}. #{away} at #{home}"
-				counter += 1
+				Matchup.new(week, away, home, ticket)
+				#@scraped_games << "#{counter}. #{away} at #{home}"
+				#counter += 1
 			end
 		end
 	end
@@ -39,23 +40,6 @@ class Scraper
 				@results << "#{counter}. #{score.text}"
 				counter += 1
 			end
-		end
-	end
-
-	def self.show_games
-		@scraped_games.each do |game|
-			puts game
-		end
-		puts
-	end
-
-	def self.ticket_prices(game)
-		puts
-		if game.to_i.to_s == game
-			puts @tickets[game.to_s.to_sym]
-		else
-			game_number = @scraped_games.index { |matchup| matchup.include?(game) } + 1
-			puts @tickets[game_number.to_s.to_sym]
 		end
 	end
 
