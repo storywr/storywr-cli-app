@@ -1,11 +1,8 @@
-require 'pry'
-
-class Matchup
-  attr_accessor :week, :away, :home, :tickets
+class Tickets
+  attr_accessor :away, :home, :tickets
   @@all = []
 
-  def initialize(week, away, home, tickets)
-    @week = week
+  def initialize(away, home, tickets)
     @away = away
     @home = home
     @tickets = tickets
@@ -21,12 +18,9 @@ class Matchup
   end
 
   def self.this_weeks_games
-    puts "NFL Games this week:"
-    puts "----------------------"
     @@all.each do |matchup|
       puts "#{matchup.away} at #{matchup.home}"
     end
-    puts "----------------------"
   end
 
   def self.find_tickets(team)

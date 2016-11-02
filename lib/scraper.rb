@@ -13,7 +13,7 @@ class Scraper
 			home = game.css(".home .team-name span").text
 			away = away.sub("#{home}", "")
 			unless home == ""
-				Matchup.new(week, away, home, ticket)
+				Tickets.new(away, home, ticket)
 			end
 		end
 	end
@@ -30,6 +30,7 @@ class Scraper
 			unless home == ""
 				links = game.css("td a").map { |link| link["href"] }
 				headline_url = links[4]
+				Scores.new(score.text, "http://www.espn.com#{headline_url}")
 				@summaries[counter.to_s.to_sym] = "http://www.espn.com#{headline_url}"
 				@results << "#{counter}. #{score.text}"
 				counter += 1
