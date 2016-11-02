@@ -18,13 +18,13 @@ class Tickets
   end
 
   def self.this_weeks_games
-    @@all.each do |game|
+    all.each do |game|
       puts "#{game.away} at #{game.home}"
     end
   end
 
   def self.find_tickets(team)
-    @@all.each do |game|
+    all.each do |game|
       if game.away == team || game.home == team
         puts game.tickets
       end

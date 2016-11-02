@@ -63,10 +63,18 @@ class CLI
 		puts
 		puts "Enter the corresponding number of the game you would like to read about, or type 'all' for all headlines."
 		input = gets.strip.downcase
-		if input == "all"
-			Scores.all_headlines
-		else
-			Scores.game_headlines(input)
+		loop do
+			if input == "all"
+				Scores.all_headlines
+			else
+				Scores.game_headlines(input)
+			end
+			puts
+			puts "Pick another game or type 'quit' to exit."
+			input = gets.strip.downcase
+			if input == "quit"
+				break
+			end
 		end
 	end
 
