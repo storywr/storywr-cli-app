@@ -49,6 +49,24 @@ class CLI
 		Scraper.get_stats(week)
 		Scores.this_weeks_scores
 		puts "----------------------"
+		puts "Would you like to read headlines? (y/n)"
+		answer = gets.strip.downcase
+		if answer == "y"
+			headlines
+		else
+			puts
+			puts "Bye!"
+		end
+	end
+
+	def headlines
+		puts "Please enter the corresponding number of the game you would like to read about, or type 'all' for all headlines."
+		input = gets.strip.downcase
+		if input == "all"
+			Scores.all_headlines
+		else
+			Scores.game_headlines(input)
+		end
 	end
 
 	def find_stats
