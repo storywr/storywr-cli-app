@@ -33,13 +33,4 @@ class Scraper
 		end
 	end
 
-	def self.summary(game)
-		doc = Nokogiri::HTML(open(@summaries[game.to_s.to_sym]))
-		headline = doc.css("#gamepackage-top-stories header h1").text
-		summary = doc.css("#gamepackage-top-stories header p").text
-		puts
-		puts headline
-		puts summary
-	end
-
 end

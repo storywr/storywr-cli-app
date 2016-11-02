@@ -1,4 +1,5 @@
-require 'pry'
+require 'nokogiri'
+require 'open-uri'
 
 class Scores
   attr_accessor :number, :score, :url
@@ -37,7 +38,6 @@ class Scores
       end
     end
   end
-
 
   def self.all_headlines
     @@all.each do |game|
