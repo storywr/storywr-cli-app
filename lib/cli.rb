@@ -1,11 +1,7 @@
 class CLI
 
 	def call
-		Scraper.get_games(10)
-		Matchup.this_weeks_games
-		puts
-		puts
-		Matchup.find_tickets("Miami")
+		start
 	end
 
 	def start
@@ -18,12 +14,26 @@ class CLI
 				find_stats
 				break
 			elsif input == "tickets"
-				find_tickets
+				tickets
 				break
 			else
 				puts "Answer not recognized"
 			end
 		end
+	end
+
+	def tickets
+		puts
+		puts "Enter NFL Week Number"
+		week = gets.strip
+		puts
+		Scraper.get_games(week)
+		Matchup.this_weeks_games
+		puts
+		puts "Which team would you like to see?"
+		team = gets.strip
+		puts
+		Matchup.find_tickets(team)
 	end
 
 	def find_stats
@@ -38,24 +48,6 @@ class CLI
 		puts "Enter corresponding number for game summary."
 		game = gets.strip
 		Scraper.summary(game)
-	end
-
-	def find_tickets
-		puts
-		puts "Enter NFL Week Number"
-		week = gets.strip
-		display_games(week)
-		puts
-		puts "Enter corresponding game number or team name."
-		input = gets.strip
-		Scraper.ticket_prices(input)
-	end
-
-	def display_games(week)
-		puts
-		puts "NFL Games Week #{week}:"
-		Scraper.get_games(week)
-		Scraper.show_games
 	end
 
 end

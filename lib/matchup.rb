@@ -22,10 +22,11 @@ class Matchup
 
   def self.this_weeks_games
     puts "NFL Games this week:"
-    puts
+    puts "----------------------"
     @@all.each do |matchup|
       puts "#{matchup.away} at #{matchup.home}"
     end
+    puts "----------------------"
   end
 
   def self.find_tickets(team)

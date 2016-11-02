@@ -2,24 +2,18 @@ require 'nokogiri'
 require 'open-uri'
 
 class Scraper
-	attr_reader :scraped_games, :ticket, :results, :summaries
+	attr_reader :results, :summaries
 
 	def self.get_games(week)
 		doc = Nokogiri::HTML(open("http://www.espn.com/nfl/schedule/_/week/#{week}"))
-		@scraped_games = []
-		@tickets = {}
-		counter = 1
 		games = doc.css("#sched-container .responsive-table-wrap tr")
 		games.each do |game|
 			ticket = game.css(".tickets").text
-			@tickets[counter.to_s.to_sym] = ticket
 			away = game.css(".team-name span").text
 			home = game.css(".home .team-name span").text
 			away = away.sub("#{home}", "")
 			unless home == ""
 				Matchup.new(week, away, home, ticket)
-				#@scraped_games << "#{counter}. #{away} at #{home}"
-				#counter += 1
 			end
 		end
 	end
