@@ -1,21 +1,20 @@
+require 'pry'
 class CLI
-
-	def call
-		start
-	end
 
 	def start
 		puts
 		puts "Welcome to NFL Scores and Ticket Finder!"
+		main_menu
+	end
+
+	def main_menu
 		loop do
 			puts "Enter 'Scores' to see scores and headlines of past games and 'Tickets' to find Tickets for upcoming games."
 			input = gets.strip.downcase
 			if input == "scores"
 				scores
-				break
 			elsif input == "tickets"
 				tickets
-				break
 			else
 				puts "Answer not recognized"
 			end
@@ -30,13 +29,14 @@ class CLI
 		Scraper.get_games(week)
 		puts "NFL Games Week #{week}:"
 		puts "-----------------------"
-		Tickets.this_weeks_games
+		Ticket.this_weeks_games
 		puts "-----------------------"
 		puts
 		puts "Which team would you like to see?"
 		team = gets.strip
-		puts
-		Tickets.find_tickets(team)
+		Ticket.find_tickets(team).each do |ticket|
+			puts ticket.details
+		end
 	end
 
 	def scores
@@ -55,7 +55,17 @@ class CLI
 			headlines
 		else
 			puts
-			puts "Bye!"
+			puts "Type 'main' for main menu or 'quit' to exit."
+			input = gets.strip.downcase
+			if input == "quit"
+				exit
+			elsif input == "main"
+				Scores.reset
+				Ticket.reset
+				main_menu
+			else
+				exit
+			end
 		end
 	end
 
@@ -70,10 +80,14 @@ class CLI
 				Scores.game_headlines(input)
 			end
 			puts
-			puts "Pick another game or type 'quit' to exit."
+			puts "Pick another game, go to main menu type 'main', else type 'quit' to exit."
 			input = gets.strip.downcase
 			if input == "quit"
-				break
+				exit
+			elsif input == "main"
+				Scores.reset
+				Ticket.reset
+				main_menu
 			end
 		end
 	end

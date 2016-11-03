@@ -1,16 +1,20 @@
-class Tickets
-  attr_accessor :away, :home, :tickets
+class Ticket
+  attr_accessor :away, :home, :details
   @@all = []
 
-  def initialize(away, home, tickets)
-    @away = away
-    @home = home
-    @tickets = tickets
+  def initialize(hash)
+    hash.each do |key, value|
+      self.send("#{key}=", value)
+    end
     save
   end
 
   def self.all
     @@all
+  end
+
+  def self.reset
+    all.clear
   end
 
   def save
@@ -24,11 +28,7 @@ class Tickets
   end
 
   def self.find_tickets(team)
-    all.each do |game|
-      if game.away == team || game.home == team
-        puts game.tickets
-      end
-    end
+    all.select {|game| game.away == team || game.home == team }
   end
 
 end

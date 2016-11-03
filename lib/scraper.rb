@@ -7,12 +7,13 @@ class Scraper
 		doc = Nokogiri::HTML(open("http://www.espn.com/nfl/schedule/_/week/#{week}"))
 		games = doc.css("#sched-container .responsive-table-wrap tr")
 		games.each do |game|
-			ticket = game.css(".tickets").text
-			away = game.css(".team-name span").text
 			home = game.css(".home .team-name span").text
-			away = away.sub("#{home}", "")
 			unless home == ""
-				Tickets.new(away, home, ticket)
+				Ticket.new({
+					details: game.css(".tickets").text,
+					home: home,
+					away: game.css(".team-name span").text.sub("#{home}", "")
+				})
 			end
 		end
 	end
@@ -22,12 +23,14 @@ class Scraper
 		counter = 1
 		games = doc.css("#sched-container .responsive-table-wrap tr")
 		games.each do |game|
-			score = game.css("td")[2]
 			home = game.css(".home .team-name span").text
+			links = game.css("td a").map { |link| link["href"] }
 			unless home == ""
-				links = game.css("td a").map { |link| link["href"] }
-				headline_url = links[4]
-				Scores.new(counter, score.text, "http://www.espn.com#{headline_url}")
+				Scores.new({
+					number: counter,
+					score: game.css("td")[2].text,
+					headline_url: "http://www.espn.com#{links[4]}"
+					})
 				counter += 1
 			end
 		end
